@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="page1">
+      <div data-role="header">
+        <h1>My Title (Page 1)</h1>
+      </div>
+      <div data-role="content">
+        <p>Hello World!</p>
+        <p>
+          Take me to the <a href="#page2">second page</a><br>
+          Take me to the <a href="page3.html">third page</a>
+        </p>
+      </div>
+    </div>
+    <div data-role="page" id="page2">
+      <div data-role="header">
+        <h1>My Title (Page 2)</h1>
+      </div>
+      <div data-role="content">
+        <p>Hello World!</p>
+        <p>
+          Take me back to the <a href="#page1">first page</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

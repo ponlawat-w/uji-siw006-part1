@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=devide-width, initial-scale=1.0">
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -10,24 +11,36 @@
     <div data-role="page" id="page1">
       <div data-role="header">
         <h1>My Title (Page 1)</h1>
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#">Uno</a></li>
+            <li><a href="#">Dos</a></li>
+            <li><a href="#">Tres</a></li>
+            <li><a href="#">Cuatro</a></li>
+            <li><a href="#">Cinco</a></li>
+          </ul>
+        </div>
       </div>
       <div data-role="content">
         <p>Hello World!</p>
         <p>
-          Take me to the <a href="#page2">second page</a><br>
+          Take me to the <a href="#page2" data-transition="flip">second page</a><br>
           Take me to the <a href="page3.html">third page</a>
         </p>
       </div>
     </div>
     <div data-role="page" id="page2">
-      <div data-role="header">
+      <div data-role="header" data-add-back-btn="true">
         <h1>My Title (Page 2)</h1>
       </div>
       <div data-role="content">
-        <p>Hello World!</p>
-        <p>
-          Take me back to the <a href="#page1">first page</a>
-        </p>
+        <ul data-role="listview">
+          <li><a href="#">Primero</a></li>
+          <li><a href="#">Segundo</a></li>
+          <li><a href="#">Tercero</a></li>
+          <li><a href="#">Cuarto</a></li>
+          <li><a href="#">Quinto</a></li>
+        </ul>
       </div>
     </div>
   </body>

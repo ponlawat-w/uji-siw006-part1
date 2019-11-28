@@ -1,0 +1,2 @@
+var IP_GEOLOCATION_API_KEY = '';
+var OPEN_WEATHER_MAP_API_KEY = '';

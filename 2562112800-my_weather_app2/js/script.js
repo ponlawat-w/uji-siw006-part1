@@ -11,28 +11,18 @@ $(document).ready(() => {
   );
 
   const getLocation = () => new Promise((resolve, reject) => {
-    const requestSuccess = response => {
-      resolve({
-        lat: parseFloat(response.latitude),
-        lng: parseFloat(response.longitude)
-      });
-    };
-
-    const requestFailed = response => {
-      reject(response);
-    };
-
-    const requestUrl = createUrl('https://api.ipgeolocation.io/ipgeo', {apiKey: IP_GEOLOCATION_API_KEY});
-
-    $.ajax({
-      url: requestUrl,
-      method: 'GET',
-      success: requestSuccess,
-      error: requestFailed
-    })
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success => {
+        resolve({lat: success.coords.latitude, lng: success.coords.longitude});
+      }, reject);
+    } else {
+      reject('Cannot use navigator.geolocation');
+    }
   });
 
-  const getWeatherData = (lat, lng, limit = null) => new Promise((resolve, reject) => {
+  const getWeatherData = (lat = null, lng = null, limit = null) => new Promise((resolve, reject) => {
+    const findDistance = lat && lng;
+
     const requestSuccess = response => {
       if (response.stations) {
         const headers = response.stations.columns.map(x => x.toLowerCase());
@@ -43,11 +33,15 @@ $(document).ready(() => {
           $.each(record, (colIdx, cell) => {
             station[headers[colIdx]] = cell;
           });
-          station.distance = distance(lat, lng, parseFloat(station.latitud), parseFloat(station.longitud));
+          if (findDistance) {
+            station.distance = distance(lat, lng, parseFloat(station.latitud), parseFloat(station.longitud));
+          }
           data.push(station);
         });
 
-        data.sort((a, b) => a.distance - b.distance);
+        if (findDistance) {
+          data.sort((a, b) => a.distance - b.distance);
+        }
 
         if (limit) {
           data.splice(limit);
@@ -89,8 +83,20 @@ $(document).ready(() => {
     e.stopImmediatePropagation();
 
     try {
-      const location = await getLocation();
-      const stations = await getWeatherData(location.lat, location.lng, 30);
+      let location = null;
+      try {
+        location = await getLocation();
+      } catch {
+        location = null;
+      }
+
+      let stations;
+      if (location) {
+        stations = await getWeatherData(location.lat, location.lng, 30);
+      } else {
+        stations = await getWeatherData(null, null, 30);
+      }
+      
       populateView(stations);
     } catch (error) {
       console.error(error);

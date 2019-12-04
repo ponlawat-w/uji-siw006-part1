@@ -68,12 +68,15 @@ const refreshHandler = async(e) => {
   e.stopImmediatePropagation();
 
   try {
+    $.mobile.loading('show');
     const location = await getLocation();
     const weatherData = await getWeatherData(location.lat, location.lng);
     stations = weatherData.list;
     populateView();
+    $.mobile.loading('hide');
   } catch (error) {
     console.error(error);
+    $.mobile.loading('hide');
   }
 };
 

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "com.phonegap.example"
+    versionCode = "10"
+    version     = "1.0.0" >
+  <!-- versionCode is optional and Android only -->
+
+  <name>Meteoclimatic Network App</name>
+
+  <description>
+      An application that gives realtime temperatue of station and its details
+  </description>
+
+  <author>
+      Ponlawat Weerapanpisit
+  </author>
+    
+  <plugin name="cordova-plugin-statusbar"  />
+  <plugin name="cordova-plugin-whitelist" spec="1" />
+  
+  <preference name="StatusBarStyle" value="lightcontent" />
+  
+  <!-- App requested permission -->
+  <preference name="permissions" value="none"/>
+  
+  <allow-navigation href="*" />
+  <allow-intent href="*" />
+  <access origin="*" />
+    
+</widget>
